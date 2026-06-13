@@ -18,6 +18,7 @@ Usage (once implemented):
     print(result["error"])   # None on success
 """
 
+import re
 from tools import search_listings, suggest_outfit, create_fit_card
 
 
@@ -92,9 +93,66 @@ def run_agent(query: str, wardrobe: dict) -> dict:
     Before writing code, complete the Planning Loop and State Management sections
     of planning.md — your implementation should match what you described there.
     """
-    # TODO: implement the planning loop
+    # Step 1: Initialize session
     session = _new_session(query, wardrobe)
-    session["error"] = "Planning loop not yet implemented."
+
+    # Step 2: Parse query to extract description, size, max_price
+    # Using regex patterns to extract structured info from natural language
+    description = query
+    size = None
+    max_price = None
+
+    # Extract price: look for "$X" or "under $X" or "$X or less"
+    price_match = re.search(r"\$(\d+(?:\.\d{2})?)", query)
+    if price_match:
+        max_price = float(price_match.group(1))
+        # Remove price from description to clean it up
+        description = re.sub(r"\$\d+(?:\.\d{2})?", "", query)
+
+    # Extract size: look for "size X" or "size X/Y"
+    size_match = re.search(r"size\s+([A-Za-z0-9/\-]+)", query, re.IGNORECASE)
+    if size_match:
+        size = size_match.group(1).strip()
+        # Remove size from description to clean it up
+        description = re.sub(r"size\s+[A-Za-z0-9/\-]+", "", query, flags=re.IGNORECASE)
+
+    # Clean up description: remove extra whitespace
+    description = " ".join(description.split()).strip()
+
+    session["parsed"] = {
+        "description": description,
+        "size": size,
+        "max_price": max_price,
+    }
+
+    # Step 3: Call search_listings
+    session["search_results"] = search_listings(
+        description=description,
+        size=size,
+        max_price=max_price,
+    )
+
+    # Step 4: Check if we have results — if not, return early with error
+    if not session["search_results"]:
+        session["error"] = "Sorry, no listings matched your search. Try different keywords, a larger size range, or a higher budget."
+        return session
+
+    # Step 5: Select top result
+    session["selected_item"] = session["search_results"][0]
+
+    # Step 6: Call suggest_outfit
+    session["outfit_suggestion"] = suggest_outfit(
+        new_item=session["selected_item"],
+        wardrobe=session["wardrobe"],
+    )
+
+    # Step 7: Call create_fit_card
+    session["fit_card"] = create_fit_card(
+        outfit=session["outfit_suggestion"],
+        new_item=session["selected_item"],
+    )
+
+    # Step 8: Return completed session
     return session
 
 

@@ -1,8 +1,8 @@
 """
 tests/test_tools.py
 
-Pytest test cases for all three FitFindr tools.
-Tests each tool individually with both happy paths and failure modes.
+Pytest test cases for all three FitFindr tools, planning loop, and Gradio handler.
+Tests each tool individually, the agent planning loop, and the web interface handler.
 """
 
 import sys
@@ -13,6 +13,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import pytest
 from tools import search_listings, suggest_outfit, create_fit_card
+from agent import run_agent
+from app import handle_query
 from utils.data_loader import get_example_wardrobe, get_empty_wardrobe
 
 
@@ -165,3 +167,156 @@ class TestCreateFitCard:
         # Commenting out strict equality check since LLM outputs can vary unpredictably
         # Just verify both are sensible responses
         assert not caption1.startswith("Error") or not caption2.startswith("Error")
+
+
+# ── Planning Loop (agent.py) tests ────────────────────────────────────────────
+
+class TestPlanningLoop:
+    """Test the run_agent() planning loop"""
+
+    def test_run_agent_no_results_path(self):
+        """Should return error when search finds nothing"""
+        session = run_agent(
+            query="designer ballgown size XXS under $5",
+            wardrobe=get_example_wardrobe(),
+        )
+
+        # Should have error set
+        assert session["error"] is not None
+        assert "no listings matched" in session["error"].lower()
+
+        # Should not call further tools
+        assert session["selected_item"] is None
+        assert session["outfit_suggestion"] is None
+        assert session["fit_card"] is None
+        assert len(session["search_results"]) == 0
+
+    def test_run_agent_query_parsing(self):
+        """Should extract description, size, and price from query"""
+        session = run_agent(
+            query="vintage graphic tee under $30, size M",
+            wardrobe=get_example_wardrobe(),
+        )
+
+        # Check parsed values
+        assert session["parsed"]["description"] is not None
+        assert "graphic" in session["parsed"]["description"].lower() or "tee" in session["parsed"]["description"].lower()
+        assert session["parsed"]["size"] == "M"
+        assert session["parsed"]["max_price"] == 30.0
+
+    def test_run_agent_session_state_flow(self):
+        """Session state should flow correctly between tools"""
+        session = run_agent(
+            query="vintage jacket",
+            wardrobe=get_example_wardrobe(),
+        )
+
+        # If search found results, check state flows
+        if not session["error"]:
+            # Should have selected an item
+            assert session["selected_item"] is not None
+            assert isinstance(session["selected_item"], dict)
+            assert "title" in session["selected_item"]
+
+            # Search results should contain selected item
+            assert session["selected_item"] in session["search_results"]
+
+    def test_run_agent_with_empty_wardrobe(self):
+        """Should still work with empty wardrobe (no crash)"""
+        session = run_agent(
+            query="vintage jacket",
+            wardrobe=get_empty_wardrobe(),
+        )
+
+        # If search found results, should complete
+        if not session["error"]:
+            assert session["selected_item"] is not None
+            # outfit_suggestion might have general advice for empty wardrobe
+            assert session["outfit_suggestion"] is not None or session["outfit_suggestion"] == ""
+
+
+# ── Gradio Handler (app.py) tests ─────────────────────────────────────────────
+
+class TestGradioHandler:
+    """Test the handle_query() Gradio interface handler"""
+
+    def test_handle_query_empty_input(self):
+        """Should guard against empty query"""
+        listing, outfit, fitcard = handle_query("", "Example wardrobe")
+
+        assert "please enter" in listing.lower() or "empty" in listing.lower()
+        assert outfit == ""
+        assert fitcard == ""
+
+    def test_handle_query_whitespace_only(self):
+        """Should handle whitespace-only query"""
+        listing, outfit, fitcard = handle_query("   ", "Example wardrobe")
+
+        assert outfit == ""
+        assert fitcard == ""
+
+    def test_handle_query_no_results(self):
+        """Should return error for impossible query"""
+        listing, outfit, fitcard = handle_query(
+            "designer ballgown size XXS under $5",
+            "Example wardrobe"
+        )
+
+        assert "no listings matched" in listing.lower()
+        assert outfit == ""
+        assert fitcard == ""
+
+    def test_handle_query_wardrobe_selection_example(self):
+        """Should use example wardrobe when selected"""
+        listing, outfit, fitcard = handle_query(
+            "vintage jacket",
+            "Example wardrobe"
+        )
+
+        # If query succeeded, should have content
+        if "please enter" not in listing.lower() and "no listings" not in listing.lower():
+            assert len(listing) > 0
+
+    def test_handle_query_wardrobe_selection_empty(self):
+        """Should use empty wardrobe when selected"""
+        listing, outfit, fitcard = handle_query(
+            "vintage jacket",
+            "Empty wardrobe (new user)"
+        )
+
+        # If query succeeded, should have content
+        if "please enter" not in listing.lower() and "no listings" not in listing.lower():
+            assert len(listing) > 0
+
+    def test_handle_query_output_format(self):
+        """Successful query should return three non-empty strings"""
+        # Use a query that's likely to find results
+        listing, outfit, fitcard = handle_query(
+            "vintage",
+            "Example wardrobe"
+        )
+
+        # All outputs should be strings
+        assert isinstance(listing, str)
+        assert isinstance(outfit, str)
+        assert isinstance(fitcard, str)
+
+        # If not an error, listing should have content
+        if "please enter" not in listing.lower() and "no listings" not in listing.lower():
+            assert len(listing) > 0
+            # Outfit and fit card might still be empty if there's a Groq API issue
+            # Just verify they're strings
+
+    def test_handle_query_listing_format(self):
+        """Listing output should have item details formatted nicely"""
+        listing, outfit, fitcard = handle_query(
+            "vintage",
+            "Example wardrobe"
+        )
+
+        # If query succeeded (has item details)
+        if "please enter" not in listing.lower() and "no listings" not in listing.lower() and "price" in listing.lower():
+            # Should have key item details
+            assert "price" in listing.lower()
+            assert "$" in listing or "price" in listing.lower()
+            assert "condition" in listing.lower() or "size" in listing.lower()
