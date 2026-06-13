@@ -320,3 +320,81 @@ class TestGradioHandler:
             assert "price" in listing.lower()
             assert "$" in listing or "price" in listing.lower()
             assert "condition" in listing.lower() or "size" in listing.lower()
+
+
+# ── Milestone 5: Failure Mode Tests ───────────────────────────────────────────
+
+class TestMilestone5FailureModes:
+    """Deliberately trigger each failure mode and verify graceful recovery"""
+
+    def test_search_listings_empty_result_returns_list_not_exception(self):
+        """Failure mode 1: Search returns empty list, not exception"""
+        # Impossible query: designer ballgown in XXS under $5
+        results = search_listings("designer ballgown", size="XXS", max_price=5)
+
+        assert isinstance(results, list)
+        assert results == []
+        # No exception raised ✓
+
+    def test_suggest_outfit_empty_wardrobe_returns_string_not_exception(self):
+        """Failure mode 2: suggest_outfit with empty wardrobe returns advice, not exception"""
+        results = search_listings("vintage graphic tee", size=None, max_price=50)
+        assert len(results) > 0, "Need at least one result for this test"
+
+        wardrobe = get_empty_wardrobe()
+        suggestion = suggest_outfit(results[0], wardrobe)
+
+        assert isinstance(suggestion, str)
+        assert len(suggestion) > 0
+        assert suggestion.strip()  # Not just whitespace
+        # Returns useful general advice ✓
+
+    def test_create_fit_card_empty_outfit_returns_error_string(self):
+        """Failure mode 3: create_fit_card with empty outfit returns error message"""
+        results = search_listings("vintage graphic tee", size=None, max_price=50)
+        assert len(results) > 0, "Need at least one result for this test"
+
+        # Pass empty outfit string
+        caption = create_fit_card("", results[0])
+
+        assert isinstance(caption, str)
+        assert "unable" in caption.lower() or "error" in caption.lower()
+        # Returns error message, not exception ✓
+
+    def test_agent_no_results_path_returns_helpful_error(self):
+        """Failure mode 4: Agent with no results returns helpful error, stops early"""
+        session = run_agent(
+            query="designer ballgown size XXS under $5",
+            wardrobe=get_example_wardrobe(),
+        )
+
+        # Should have error message
+        assert session["error"] is not None
+        assert isinstance(session["error"], str)
+        assert len(session["error"]) > 0
+
+        # Error should mention what to try
+        error_lower = session["error"].lower()
+        assert any(word in error_lower for word in ["different", "keywords", "size", "budget", "try"])
+
+        # Should NOT proceed to outfit suggestion
+        assert session["selected_item"] is None
+        assert session["outfit_suggestion"] is None
+        assert session["fit_card"] is None
+        # Early return with helpful message ✓
+
+    def test_gradio_handler_no_results_returns_error_and_empty_outputs(self):
+        """Failure mode 5: Gradio interface handles no-results gracefully"""
+        listing, outfit, fitcard = handle_query(
+            "designer ballgown size XXS under $5",
+            "Example wardrobe"
+        )
+
+        # First panel should have error
+        assert "no listings" in listing.lower()
+
+        # Other panels should be empty
+        assert outfit == ""
+        assert fitcard == ""
+
+        # User sees error in UI, not a Python traceback ✓
