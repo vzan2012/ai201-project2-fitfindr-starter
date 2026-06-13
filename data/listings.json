@@ -7,7 +7,7 @@
     "style_tags": ["vintage", "classic", "denim", "streetwear"],
     "size": "W30 L30",
     "condition": "good",
-    "price": 38.00,
+    "price": 38.0,
     "colors": ["blue", "indigo"],
     "brand": "Levi's",
     "platform": "depop"
@@ -20,7 +20,7 @@
     "style_tags": ["y2k", "vintage", "graphic tee", "cottagecore"],
     "size": "S/M",
     "condition": "excellent",
-    "price": 18.00,
+    "price": 18.0,
     "colors": ["white", "pink", "purple"],
     "brand": null,
     "platform": "depop"
@@ -33,7 +33,7 @@
     "style_tags": ["grunge", "vintage", "flannel", "streetwear", "layering"],
     "size": "XL (oversized)",
     "condition": "good",
-    "price": 22.00,
+    "price": 22.0,
     "colors": ["red", "black"],
     "brand": "Woolrich",
     "platform": "thredUp"
@@ -46,7 +46,7 @@
     "style_tags": ["90s", "vintage", "athletic", "streetwear"],
     "size": "M",
     "condition": "excellent",
-    "price": 45.00,
+    "price": 45.0,
     "colors": ["navy", "white"],
     "brand": "Champion",
     "platform": "poshmark"
@@ -59,7 +59,7 @@
     "style_tags": ["vintage", "cottagecore", "70s", "earth tones"],
     "size": "W28",
     "condition": "good",
-    "price": 32.00,
+    "price": 32.0,
     "colors": ["rust", "orange"],
     "brand": null,
     "platform": "depop"
@@ -69,10 +69,16 @@
     "title": "Graphic Tee — 2003 Tour Bootleg Style",
     "description": "Vintage-style bootleg tee with faded graphic. Slightly boxy fit. 100% cotton, soft and worn-in.",
     "category": "tops",
-    "style_tags": ["graphic tee", "vintage", "grunge", "streetwear", "band tee"],
+    "style_tags": [
+      "graphic tee",
+      "vintage",
+      "grunge",
+      "streetwear",
+      "band tee"
+    ],
     "size": "L",
     "condition": "good",
-    "price": 24.00,
+    "price": 24.0,
     "colors": ["black"],
     "brand": null,
     "platform": "depop"
@@ -85,7 +91,7 @@
     "style_tags": ["denim", "vintage", "classic", "streetwear"],
     "size": "S",
     "condition": "excellent",
-    "price": 42.00,
+    "price": 42.0,
     "colors": ["light blue"],
     "brand": "Wrangler",
     "platform": "poshmark"
@@ -95,10 +101,16 @@
     "title": "Knit Cardigan — Chunky Brown",
     "description": "Super cozy oversized cardigan. Earth-tone brown, chunky knit. Hits at the hip. Perfect for layering over anything.",
     "category": "tops",
-    "style_tags": ["cottagecore", "cozy", "oversized", "earth tones", "knitwear"],
+    "style_tags": [
+      "cottagecore",
+      "cozy",
+      "oversized",
+      "earth tones",
+      "knitwear"
+    ],
     "size": "One Size / Oversized",
     "condition": "excellent",
-    "price": 35.00,
+    "price": 35.0,
     "colors": ["brown", "tan"],
     "brand": null,
     "platform": "depop"
@@ -111,7 +123,7 @@
     "style_tags": ["y2k", "goth", "platform", "90s"],
     "size": "US 7",
     "condition": "good",
-    "price": 55.00,
+    "price": 55.0,
     "colors": ["black"],
     "brand": "Demonia",
     "platform": "depop"
@@ -124,7 +136,7 @@
     "style_tags": ["90s", "vintage", "athletic", "color block", "streetwear"],
     "size": "L",
     "condition": "good",
-    "price": 40.00,
+    "price": 40.0,
     "colors": ["purple", "teal", "black"],
     "brand": null,
     "platform": "thredUp"
@@ -137,7 +149,7 @@
     "style_tags": ["y2k", "cargo", "2000s", "streetwear"],
     "size": "W29",
     "condition": "fair",
-    "price": 27.00,
+    "price": 27.0,
     "colors": ["khaki", "tan"],
     "brand": null,
     "platform": "poshmark"
@@ -150,7 +162,7 @@
     "style_tags": ["vintage", "basics", "oversized", "classic"],
     "size": "XL (fits oversized)",
     "condition": "good",
-    "price": 20.00,
+    "price": 20.0,
     "colors": ["navy"],
     "brand": null,
     "platform": "thredUp"
@@ -163,7 +175,7 @@
     "style_tags": ["90s", "vintage", "feminine", "floral", "cottagecore"],
     "size": "M",
     "condition": "good",
-    "price": 30.00,
+    "price": 30.0,
     "colors": ["ivory", "dusty pink", "green"],
     "brand": null,
     "platform": "depop"
@@ -176,7 +188,7 @@
     "style_tags": ["vintage", "western", "classic", "earth tones"],
     "size": "One Size (adjustable)",
     "condition": "excellent",
-    "price": 12.00,
+    "price": 12.0,
     "colors": ["brown"],
     "brand": null,
     "platform": "thredUp"
@@ -189,7 +201,7 @@
     "style_tags": ["vintage", "grunge", "graphic", "streetwear"],
     "size": "L",
     "condition": "fair",
-    "price": 26.00,
+    "price": 26.0,
     "colors": ["black", "charcoal"],
     "brand": null,
     "platform": "depop"
@@ -202,7 +214,7 @@
     "style_tags": ["vintage", "denim", "summer", "classic"],
     "size": "W27",
     "condition": "good",
-    "price": 24.00,
+    "price": 24.0,
     "colors": ["light blue", "blue"],
     "brand": "Levi's",
     "platform": "poshmark"
@@ -215,7 +227,7 @@
     "style_tags": ["y2k", "grunge", "goth", "layering"],
     "size": "S/M",
     "condition": "excellent",
-    "price": 15.00,
+    "price": 15.0,
     "colors": ["black"],
     "brand": null,
     "platform": "depop"
@@ -228,7 +240,7 @@
     "style_tags": ["vintage", "classic", "linen", "cottagecore", "minimal"],
     "size": "M/L",
     "condition": "excellent",
-    "price": 38.00,
+    "price": 38.0,
     "colors": ["cream", "off-white"],
     "brand": null,
     "platform": "thredUp"
@@ -241,7 +253,7 @@
     "style_tags": ["y2k", "platform", "90s", "streetwear"],
     "size": "US 8",
     "condition": "good",
-    "price": 48.00,
+    "price": 48.0,
     "colors": ["white"],
     "brand": null,
     "platform": "poshmark"
@@ -254,7 +266,7 @@
     "style_tags": ["vintage", "basics", "earth tones", "classic"],
     "size": "M",
     "condition": "excellent",
-    "price": 16.00,
+    "price": 16.0,
     "colors": ["burgundy", "wine"],
     "brand": null,
     "platform": "thredUp"
@@ -267,7 +279,7 @@
     "style_tags": ["earth tones", "classic", "minimal", "vintage"],
     "size": "W30",
     "condition": "excellent",
-    "price": 29.00,
+    "price": 29.0,
     "colors": ["olive", "green"],
     "brand": null,
     "platform": "poshmark"
@@ -280,7 +292,7 @@
     "style_tags": ["90s", "vintage", "leather", "classic", "grunge"],
     "size": "M",
     "condition": "good",
-    "price": 75.00,
+    "price": 75.0,
     "colors": ["black"],
     "brand": null,
     "platform": "depop"
@@ -293,7 +305,7 @@
     "style_tags": ["cottagecore", "boho", "crochet", "summer"],
     "size": "S/M",
     "condition": "excellent",
-    "price": 22.00,
+    "price": 22.0,
     "colors": ["cream", "off-white"],
     "brand": null,
     "platform": "depop"
@@ -306,7 +318,7 @@
     "style_tags": ["vintage", "preppy", "classic", "earth tones"],
     "size": "M",
     "condition": "good",
-    "price": 18.00,
+    "price": 18.0,
     "colors": ["green", "forest green"],
     "brand": "Ralph Lauren",
     "platform": "thredUp"
@@ -319,7 +331,7 @@
     "style_tags": ["cottagecore", "minimal", "linen", "earth tones", "summer"],
     "size": "M/L",
     "condition": "excellent",
-    "price": 34.00,
+    "price": 34.0,
     "colors": ["natural", "ecru", "tan"],
     "brand": null,
     "platform": "poshmark"
@@ -332,7 +344,7 @@
     "style_tags": ["y2k", "athletic", "streetwear", "2000s"],
     "size": "S",
     "condition": "excellent",
-    "price": 14.00,
+    "price": 14.0,
     "colors": ["black"],
     "brand": null,
     "platform": "depop"
@@ -345,7 +357,7 @@
     "style_tags": ["vintage", "athletic", "oversized", "classic"],
     "size": "XL",
     "condition": "good",
-    "price": 21.00,
+    "price": 21.0,
     "colors": ["red", "faded red"],
     "brand": null,
     "platform": "thredUp"
@@ -358,7 +370,7 @@
     "style_tags": ["vintage", "classic", "western", "earth tones"],
     "size": "US 8.5",
     "condition": "fair",
-    "price": 44.00,
+    "price": 44.0,
     "colors": ["tan", "camel"],
     "brand": null,
     "platform": "poshmark"
@@ -371,7 +383,7 @@
     "style_tags": ["vintage", "minimal", "earth tones", "cottagecore"],
     "size": "M",
     "condition": "excellent",
-    "price": 28.00,
+    "price": 28.0,
     "colors": ["sage", "green"],
     "brand": null,
     "platform": "depop"
@@ -381,10 +393,16 @@
     "title": "Vintage Knit Vest — Argyle Brown/Cream",
     "description": "Classic argyle knit vest in brown and cream. Fits medium. V-neck. Ideal for the dark academia or preppy vintage aesthetic.",
     "category": "tops",
-    "style_tags": ["vintage", "preppy", "knitwear", "dark academia", "earth tones"],
+    "style_tags": [
+      "vintage",
+      "preppy",
+      "knitwear",
+      "dark academia",
+      "earth tones"
+    ],
     "size": "M",
     "condition": "good",
-    "price": 25.00,
+    "price": 25.0,
     "colors": ["brown", "cream", "tan"],
     "brand": null,
     "platform": "thredUp"
@@ -397,7 +415,7 @@
     "style_tags": ["90s", "vintage", "streetwear", "baggy", "workwear"],
     "size": "W32",
     "condition": "good",
-    "price": 36.00,
+    "price": 36.0,
     "colors": ["dark blue", "indigo"],
     "brand": null,
     "platform": "depop"
@@ -410,7 +428,7 @@
     "style_tags": ["earth tones", "classic", "layering", "minimal"],
     "size": "M/L",
     "condition": "excellent",
-    "price": 33.00,
+    "price": 33.0,
     "colors": ["olive", "green"],
     "brand": null,
     "platform": "poshmark"
@@ -420,10 +438,16 @@
     "title": "Vintage Band Tee — Faded Grey",
     "description": "Faded grey band-style tee with distressed graphic. Crew neck. Fits boxy. Well-loved but no holes or major damage.",
     "category": "tops",
-    "style_tags": ["vintage", "grunge", "band tee", "graphic tee", "streetwear"],
+    "style_tags": [
+      "vintage",
+      "grunge",
+      "band tee",
+      "graphic tee",
+      "streetwear"
+    ],
     "size": "L",
     "condition": "fair",
-    "price": 19.00,
+    "price": 19.0,
     "colors": ["grey", "charcoal"],
     "brand": null,
     "platform": "depop"
@@ -436,7 +460,7 @@
     "style_tags": ["90s", "streetwear", "vintage", "accessories"],
     "size": "One Size",
     "condition": "excellent",
-    "price": 14.00,
+    "price": 14.0,
     "colors": ["brown", "tan", "plaid"],
     "brand": null,
     "platform": "thredUp"
@@ -449,7 +473,7 @@
     "style_tags": ["classic", "minimal", "streetwear", "basics"],
     "size": "US 9",
     "condition": "good",
-    "price": 20.00,
+    "price": 20.0,
     "colors": ["off-white", "cream"],
     "brand": null,
     "platform": "poshmark"
@@ -462,7 +486,7 @@
     "style_tags": ["vintage", "statement", "feminine", "glam"],
     "size": "S",
     "condition": "good",
-    "price": 52.00,
+    "price": 52.0,
     "colors": ["emerald", "green"],
     "brand": null,
     "platform": "depop"
@@ -475,7 +499,7 @@
     "style_tags": ["vintage", "classic", "grunge", "denim"],
     "size": "W28",
     "condition": "good",
-    "price": 30.00,
+    "price": 30.0,
     "colors": ["black", "faded black"],
     "brand": "Levi's",
     "platform": "thredUp"
@@ -488,7 +512,7 @@
     "style_tags": ["grunge", "vintage", "denim", "customized", "rock"],
     "size": "M",
     "condition": "good",
-    "price": 27.00,
+    "price": 27.0,
     "colors": ["medium blue"],
     "brand": null,
     "platform": "depop"
@@ -501,7 +525,7 @@
     "style_tags": ["vintage", "classic", "y2k", "accessories"],
     "size": "One Size",
     "condition": "excellent",
-    "price": 38.00,
+    "price": 38.0,
     "colors": ["tan", "camel"],
     "brand": null,
     "platform": "poshmark"
@@ -514,7 +538,7 @@
     "style_tags": ["tie-dye", "cottagecore", "colorful", "streetwear"],
     "size": "L/XL",
     "condition": "excellent",
-    "price": 17.00,
+    "price": 17.0,
     "colors": ["pink", "lavender", "mint"],
     "brand": null,
     "platform": "depop"
